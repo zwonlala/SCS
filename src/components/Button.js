@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import {darken, lighten} from 'polished';
 
 const StyledButton = styled.button`
@@ -18,13 +18,19 @@ const StyledButton = styled.button`
 	font-size: 1rem;
 
 	// color
-	background: #228be6;
-	&:hover {
-		background: ${lighten(0.1, '#228be6')};
-	}
-	&:active {
-		backround: ${darken(0.1, '#228be6')}
-	}
+	${props => {
+		const selected = props.theme.palette.blue;
+
+		return css`
+			background: ${selected};
+			&:hover {
+				background: ${lighten(0.1, selected)};
+			}
+			&:active {
+				background: ${darken(0.1, selected)};
+			}
+		`
+	}}
 
 	& + & {
 		margin-left: 1rem;
