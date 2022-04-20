@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {darken, lighten} from 'polished';
 
 const StyledButton = styled.button`
 	display: inline-block;
@@ -19,10 +20,10 @@ const StyledButton = styled.button`
 	// color
 	background: #228be6;
 	&:hover {
-		background: #339af0;
+		background: ${lighten(0.1, '#228be6')};
 	}
 	&:active {
-		backround: #1c7ed6;
+		backround: ${darken(0.1, '#228be6')}
 	}
 
 	& + & {
