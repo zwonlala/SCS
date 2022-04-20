@@ -14,15 +14,17 @@ function App() {
     return (
 		<ThemeProvider
 			theme={{
-                palette: {
+				palette: {
 					blue: "#228be6",
 					gray: "#495057",
-					pink: "#f06595"
-				}
-            }}
+					pink: "#f06595",
+				},
+			}}
 		>
 			<AppBlock>
 				<Button>BUTTON</Button>
+				<Button color='gray'>BUTTON2</Button>
+				<Button color='pink'>BUTTON3</Button>
 			</AppBlock>
 		</ThemeProvider>
 	);
