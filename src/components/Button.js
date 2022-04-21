@@ -17,6 +17,29 @@ const colorStyles = css`
 	}}
 `;
 
+const sizeStyles = css`
+    ${props =>
+		props.size === 'large' &&
+		css`
+			height: 3rem;
+			font-size: 1.25rem;
+		`}
+	
+	${props => 
+		props.size === 'medium' &&
+		css`
+			height: 2.25rem;
+			font-size: 1rem;
+		`}
+
+	${props => 
+		props.size === 'small' &&
+		css`
+			height: 1.75rem;
+			font-size: 0.875rem;
+		`}	
+`
+
 const StyledButton = styled.button`
 	display: inline-block;
 	outline: none;
@@ -29,8 +52,7 @@ const StyledButton = styled.button`
 	padding-right: 1rem;
 
 	// size
-	height: 2.25rem;
-	font-size: 1rem;
+	${sizeStyles}
 
 	// color
 	${colorStyles}
@@ -40,12 +62,13 @@ const StyledButton = styled.button`
 	}
 `;
 
-function Button({children, color, ...rest}) {
-    return <StyledButton color={color} {...rest}>{children}</StyledButton>;
+function Button({children, color, size, ...rest}) {
+    return <StyledButton color={color} size={size} {...rest}>{children}</StyledButton>;
 }
 
 Button.defaultProps = {
-	color: 'blue'
+	color: 'blue',
+	size: 'medium'
 }
 
 export default Button;

@@ -10,6 +10,12 @@ const AppBlock = styled.div`
     padding: 1rem;
 `
 
+const ButtonGroup = styled.div`
+	& + & {
+		margin-top: 1rem;
+	}
+`
+
 function App() {
     return (
 		<ThemeProvider
@@ -22,9 +28,23 @@ function App() {
 			}}
 		>
 			<AppBlock>
-				<Button>BUTTON</Button>
-				<Button color='gray'>BUTTON2</Button>
-				<Button color='pink'>BUTTON3</Button>
+				<ButtonGroup>
+					<Button size="large">BUTTON</Button>
+					<Button>BUTTON</Button>
+					<Button size="small">BUTTON</Button>
+				</ButtonGroup>
+
+				<ButtonGroup>
+					<Button size="large" color="gray">BUTTON</Button>
+					<Button color="gray">BUTTON</Button>
+					<Button size="small" color="gray">BUTTON</Button>
+				</ButtonGroup>
+
+				<ButtonGroup>
+					<Button size="large" color="pink">BUTTON</Button>
+					<Button color="pink">BUTTON</Button>
+					<Button size="small" color="pink">BUTTON</Button>
+				</ButtonGroup>
 			</AppBlock>
 		</ThemeProvider>
 	);
