@@ -34,19 +34,25 @@ const ButtonGroup = styled.div`
     justify-content: flex-end;
 `;
 
+const ShortMarginButton = styled(Button)`
+    &:not(&:first-child) {
+        margin-left: 0.5rem;
+    }
+`
+
 function Dialog({ title, children, confirmText, cancelText }) {
     return (
-        <DarkBackground>
-            <DialogBlock>
-                <h3>{title}</h3>
-                <p>{children}</p>
-                <ButtonGroup>
-                    <Button color='gray'>{cancelText}</Button>
-                    <Button color='pink'>{confirmText}</Button>
-                </ButtonGroup>
-            </DialogBlock>
-        </DarkBackground>
-    );
+		<DarkBackground>
+			<DialogBlock>
+				<h3>{title}</h3>
+				<p>{children}</p>
+				<ButtonGroup>
+					<ShortMarginButton color="gray">{cancelText}</ShortMarginButton>
+					<ShortMarginButton color="pink">{confirmText}</ShortMarginButton>
+				</ButtonGroup>
+			</DialogBlock>
+		</DarkBackground>
+	);
 }
 
 Dialog.defaultProps = {
