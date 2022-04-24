@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import Button from './Button';
 
 const fadeIn = keyframes`
@@ -11,12 +11,30 @@ const fadeIn = keyframes`
     }
 `;
 
+const fadeOut = keyframes`
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0
+    }
+`;
+
 const slideUp = keyframes`
     from {
         transform: translateY(200px);
     }
     to {
         transform: translateY(0px);
+    }
+`
+
+const slideDown = keyframes`
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(200px);
     }
 `
 
@@ -35,6 +53,13 @@ const DarkBackground = styled.div`
     animation-timing-function: ease-out;
     animation-name: ${fadeIn};
     animation-fill-mode: forwards;
+
+    ${props =>
+        props.disappear && 
+        css`
+            animation-name: ${fadeOut};
+        `    
+    }
 `;
 
 const DialogBlock = styled.div`
@@ -54,6 +79,13 @@ const DialogBlock = styled.div`
     animation-timing-function: ease-out;
     animation-name: ${slideUp};
     animation-fill-mode: forward;
+
+    ${props =>
+        props.disappear &&
+        css`
+            animation-name: ${slideDown};
+        `    
+    }
 `;
 
 const ButtonGroup = styled.div`
@@ -69,13 +101,25 @@ const ShortMarginButton = styled(Button)`
 `
 
 function Dialog({ title, children, confirmText, cancelText, onConfirm, onCancel, visible }) {
-    if (!visible) {
+    const [animate, setAnimate] = useState(false);
+    const [localVisible, setLocalVisible] = useState(visible);
+
+    useEffect(() => {
+        // visible 값이 true에서 false 값으로 바뀌는 것을 감지
+        if (localVisible && !visible) {
+            setAnimate(true);
+            setTimeout(() => setAnimate(false), 250);
+        }
+        setLocalVisible(visible);
+    }, [localVisible, visible]);
+
+    if (!animate && !localVisible) {
         return null;
     }
 
     return (
-		<DarkBackground>
-			<DialogBlock>
+		<DarkBackground disappear={!visible}>
+			<DialogBlock disappear={!visible}>
 				<h3>{title}</h3>
 				<p>{children}</p>
 				<ButtonGroup>
