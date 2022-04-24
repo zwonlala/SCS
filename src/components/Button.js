@@ -57,7 +57,7 @@ const fullWidthStyle = css`
 		css`
 			width: 100%;
 			juistify-content: center;
-			& + & {
+			&:not(:first-child) {
 				margin-left: 0;
 				margin-top: 1rem;
 			}
@@ -83,7 +83,7 @@ const StyledButton = styled.button`
 	${colorStyles}
 
 	// etc
-	& + & {
+	&:not(:first-child) {
 		margin-left: 1rem;
 	}
 
